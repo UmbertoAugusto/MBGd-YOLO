@@ -6,5 +6,5 @@
 
 ## How to run code:
 ```
-nohup python /home/umberto.pereira/Mosquitoes/YOLO/codes/main.py > train+test.log 2>&1 &
+nohup bash scripts/training.sh > train+test.log 2>&1 &
 ```
