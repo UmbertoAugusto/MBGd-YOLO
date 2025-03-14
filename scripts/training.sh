@@ -28,7 +28,7 @@ fi
 
 # Extract values from config.yaml usando yq local
 OBJ=$($YQ_LOCAL e '.OBJECT' $CONFIG_FILE)
-FOLDS=$($YQ_LOCAL e '.REGISTER_DATASETS.FOLDS' $CONFIG_FILE)
+FOLDS=$($YQ_LOCAL e '.NUM_FOLDS' $CONFIG_FILE)
 
 # START MOSQUITOES WORKFLOW
 echo "Starting training workflow for ${OBJ} detection, ${FOLDS} folds."
