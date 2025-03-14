@@ -2,6 +2,7 @@ import yaml
 from utils import *
 import csv
 import argparse
+import os
 
 #Argument parser
 parser = argparse.ArgumentParser(prog="MBGd with YOLO",description="MBG Eval")
@@ -56,15 +57,15 @@ best_conf_score, best_F1_score = ConfidenceThresholdOptimization(model=model_to_
 #Saving result metrics
 result_data.append([fold_number,best_conf_score,best_F1_score])
 #Writing file
-metrics_file_path = output_dir+experiment_name+'/fold'+str(fold_number)+'/metrics.txt'
+metrics_file_path = output_dir+'/'+experiment_name+'/fold'+str(fold_number)+'/metrics.txt'
 with open(metrics_file_path, mode='w') as file:
     file.write(f"Fold {fold_number}\nscore: {best_conf_score}\nF1: {best_F1_score}")
 
-#Saving metrics of all folds
+'''#Saving metrics of all folds
 csv_file_path = output_dir+'/'+experiment_name+'/metrics.csv'
 # Open the file in write mode
 with open(csv_file_path, mode='w', newline='') as file:
     # Create a csv.writer object
     writer = csv.writer(file)
     # Write data to the CSV file
-    writer.writerows(result_data)
+    writer.writerows(result_data)'''
