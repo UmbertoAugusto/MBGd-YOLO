@@ -8,3 +8,8 @@
 ```
 nohup bash scripts/training.sh > train+test.log 2>&1 &
 ```
+
+## to stop running:
+```
+killall -9 python
+```
