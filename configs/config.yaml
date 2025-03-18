@@ -1,8 +1,8 @@
-EXPERIMENT_NAME: "teste"
+EXPERIMENT_NAME: "teste4"
 PRE_TRAINED_MODEL: "yolov8n.pt"
-EPOCHS: 5
+EPOCHS: 50
 IMAGE_SIZE: 640
-PATIENCE: 100
+PATIENCE: 5
 OUTPUT_DIR: "/home/umberto.pereira/Mosquitoes/YOLO/outputs"
 NUM_FOLDS: 1
 OBJECT: "tire"
