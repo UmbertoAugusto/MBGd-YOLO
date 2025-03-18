@@ -37,6 +37,7 @@ result_data = [['fold','score','F1']]
 
 #train model
 model = YOLO(pre_trained_model)
+#model.to('cuda')
 result_path_train = experiment_name+'/fold'+str(fold_number)+'/train'
 results_train = TrainModel(model=model,
                            dataset=dataset_teste, #change for dataset when finish testing code
@@ -48,6 +49,7 @@ results_train = TrainModel(model=model,
 
 #search for best confidence score
 model_to_evaluate = YOLO(str(results_train.save_dir) + '/weights/best.pt')
+#model_to_evaluate.to('cuda')
 result_path_val = experiment_name+'/fold'+str(fold_number)+'/val/iter'
 best_conf_score, best_F1_score = ConfidenceThresholdOptimization(model=model_to_evaluate,
                                                                  dataset=dataset_teste, #change for dataset when finish testing code

@@ -1,5 +1,5 @@
 import json
-import os
+import os 
 
 def convert_to_yolo(json_file, output_directory):
     with open(json_file, 'r') as f:
