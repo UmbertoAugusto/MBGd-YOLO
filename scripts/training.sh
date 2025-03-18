@@ -32,13 +32,29 @@ FOLDS=$($YQ_LOCAL e '.NUM_FOLDS' $CONFIG_FILE)
 
 # START MOSQUITOES WORKFLOW
 echo "Starting training workflow for ${OBJ} detection, ${FOLDS} folds."
+echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+echo ""
+SECONDS=0
 
 for ((fold=1; fold<=FOLDS; fold++)); do
 
+    echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+    durantion=$SECONDS
+    echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
+    echo ""
     echo "Running train_and_val.py for fold $fold..."
     CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python codes/train_and_val.py --config-file $CONFIG_FILE --object "${OBJ}" --fold "$fold"
-
+    echo ""
+    echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+    durantion=$SECONDS
+    echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
+    echo ""
 done
 
 # FINISH MOSQUITOES WORKFLOW
+echo ""
+echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+durantion=$SECONDS
+echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
+echo ""
 echo "Training workflow completed."
