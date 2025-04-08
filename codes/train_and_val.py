@@ -45,7 +45,7 @@ results_train = TrainModel(model=model,
                            epochs=epochs,
                            patience=patience,
                            img_size=img_size,
-                           output_dir=output_dir)
+                           output_dir=output_dir,)
 
 #search for best confidence score
 model_to_evaluate = YOLO(str(results_train.save_dir) + '/weights/best.pt')
@@ -63,11 +63,11 @@ metrics_file_path = output_dir+'/'+experiment_name+'/fold'+str(fold_number)+'/me
 with open(metrics_file_path, mode='w') as file:
     file.write(f"Fold {fold_number}\nscore: {best_conf_score}\nF1: {best_F1_score}")
 
-'''#Saving metrics of all folds
+#Saving metrics of all folds
 csv_file_path = output_dir+'/'+experiment_name+'/metrics.csv'
 # Open the file in write mode
 with open(csv_file_path, mode='w', newline='') as file:
     # Create a csv.writer object
     writer = csv.writer(file)
     # Write data to the CSV file
-    writer.writerows(result_data)'''
+    writer.writerows(result_data)

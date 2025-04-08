@@ -3,6 +3,7 @@ from ultralytics import YOLO
 def TrainModel (model,dataset,experiment_name,epochs,patience,img_size,output_dir):
     '''Realiza o trainamento do modelo.'''
     results = model.train(name=experiment_name,
+                          device=0, #mudar isso para vir do config file depois de testar
                       data=dataset,
                       epochs=epochs,
                       imgsz=img_size,
