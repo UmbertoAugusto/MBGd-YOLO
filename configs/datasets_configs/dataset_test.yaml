@@ -5,5 +5,5 @@ val: images/video31 # val images (relative to 'path')
 test: # test images (optional)
 
 # Classes
-names:
-  0: tire
+nc: 1
+names: ['tire']

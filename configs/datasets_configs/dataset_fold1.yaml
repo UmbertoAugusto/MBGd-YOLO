@@ -29,5 +29,5 @@ val: [images/video14,
 test: # test images (optional)
 
 # Classes
-names:
-  0: tire
+nc: 1
+names: ['tire']
