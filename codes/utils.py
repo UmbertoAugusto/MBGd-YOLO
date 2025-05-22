@@ -1,4 +1,6 @@
 from ultralytics import YOLO
+import csv
+import os
 
 def TrainModel (model,dataset,experiment_name,epochs,patience,img_size,output_dir):
     '''Realiza o trainamento do modelo.'''
@@ -26,6 +28,10 @@ def ConfidenceThresholdOptimization (model,dataset,output_dir,experiment_name):
             F1 = metrics.box.f1[0]
         else:
             F1 = 0
+        print("////////////////////////////////////////////////")
+        print("F1 PARA TAU = ", tau, ": ", F1)
+        print("////////////////////////////////////////////////")
         if F1 > best_F1:
             best_tau = tau
+            best_F1 = F1
     return best_tau, best_F1
