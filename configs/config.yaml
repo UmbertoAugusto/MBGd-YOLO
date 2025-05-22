@@ -1,16 +1,22 @@
-EXPERIMENT_NAME: "teste8"
+EXPERIMENT_NAME: "teste6_base_cortada"
 PRE_TRAINED_MODEL: "yolov8n.pt"
 EPOCHS: 20000
 IMAGE_SIZE: 640
-PATIENCE: 1000
+PATIENCE: 500
 OUTPUT_DIR: "/home/umberto.pereira/Mosquitoes/YOLO/outputs"
 NUM_FOLDS: 1
 OBJECT: "tire"
 DATASET:
   TIRE:
-    FOLD1: "/home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold1.yaml"
-    FOLD2: "/home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold2.yaml"
-    FOLD3: "/home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold3.yaml"
-    FOLD4: "/home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold4.yaml"
-    FOLD5: "/home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold5.yaml"
-    teste: "/home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_test.yaml"
+    #uncomment waht you want yo use
+    #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold1.yaml
+    FOLD2: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold2.yaml
+    FOLD3: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold3.yaml
+    FOLD4: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold4.yaml
+    FOLD5: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold5.yaml
+    teste: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_test.yaml
+    FOLD1: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold1/10/mosquito_tire_fold1_0067.yaml
+    #FOLD2: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold2/10/mosquito_tire_fold2_0067.yaml
+    #FOLD3: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold3/10/mosquito_tire_fold3_0067.yaml
+    #FOLD4: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold4/10/mosquito_tire_fold4_0067.yaml
+    #FOLD5: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold5/10/mosquito_tire_fold5_0067.yaml
