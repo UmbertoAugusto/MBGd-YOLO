@@ -6,7 +6,7 @@
 
 ## How to run code:
 ```
-nohup bash scripts/training.sh > file_name.log 2>&1 &
+nohup bash scripts/training.sh > logs/file_name.log 2>&1 &
 ```
 
 ## to stop running:
