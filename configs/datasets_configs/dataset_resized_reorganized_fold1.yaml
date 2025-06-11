@@ -1,0 +1,7 @@
+path: /home/umberto.pereira/Mosquitoes/dataset/resized_images/tire/fold1 # dataset root dir
+
+train: images/train
+val: images/val
+
+nc: 1  # number of classes
+names: ['tire']  # class names

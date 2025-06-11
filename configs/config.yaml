@@ -1,22 +1,35 @@
-EXPERIMENT_NAME: "teste6_base_cortada"
+EXPERIMENT_NAME: "base_redimensionada_organizacao_original_teste3"
 PRE_TRAINED_MODEL: "yolov8n.pt"
-EPOCHS: 20000
+EPOCHS: 5000
 IMAGE_SIZE: 640
-PATIENCE: 500
+PATIENCE: 20
 OUTPUT_DIR: "/home/umberto.pereira/Mosquitoes/YOLO/outputs"
-NUM_FOLDS: 1
+NUM_FOLDS: 2
 OBJECT: "tire"
 DATASET:
   TIRE:
-    #uncomment waht you want yo use
+    #uncomment what you want yo use
+    #MBGv2
     #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold1.yaml
-    FOLD2: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold2.yaml
-    FOLD3: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold3.yaml
-    FOLD4: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold4.yaml
-    FOLD5: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold5.yaml
+    #FOLD2: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold2.yaml
+    #FOLD3: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold3.yaml
+    #FOLD4: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold4.yaml
+    #FOLD5: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold5.yaml
+    #teste
     teste: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_test.yaml
-    FOLD1: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold1/10/mosquito_tire_fold1_0067.yaml
+    #cropped images
+    #FOLD1: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold1/10/mosquito_tire_fold1_0067.yaml
     #FOLD2: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold2/10/mosquito_tire_fold2_0067.yaml
     #FOLD3: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold3/10/mosquito_tire_fold3_0067.yaml
     #FOLD4: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold4/10/mosquito_tire_fold4_0067.yaml
     #FOLD5: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold5/10/mosquito_tire_fold5_0067.yaml
+    #MBGv2 resized and reorganized
+    #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_fold1.yaml
+    #MBGv2 reorganized
+    #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_reorganized_fold1.yaml
+    #MBGv2 resized and original organization
+    FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_original_organization_fold1.yaml
+    FOLD2: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_original_organization_fold2.yaml
+    FOLD3: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_original_organization_fold3.yaml
+    FOLD4: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_original_organization_fold4.yaml
+    FOLD5: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_original_organization_fold5.yaml

@@ -1,0 +1,33 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: /home/umberto.pereira/Mosquitoes/dataset/resized_images/tire # dataset root dir
+train: [images/video10,
+        images/video11,
+        images/video16,
+        images/video17,
+        images/video18,
+        images/video19,
+        images/video20,
+        images/video21,
+        images/video22,
+        images/video23,
+        images/video24,
+        images/video25,
+        images/video26,
+        images/video27,
+        images/video28,
+        images/video29,
+        images/video30,
+        images/video31] # train images (relative to 'path')
+val: [images/video14,
+      images/video15,
+      images/video32,
+      images/video33,
+      images/video34,
+      images/video35,
+      images/video36,
+      images/video37] # val images (relative to 'path')
+test: # test images (optional)
+
+# Classes
+nc: 1
+names: ['tire']
