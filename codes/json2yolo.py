@@ -10,8 +10,6 @@ def convert_to_yolo(json_file, output_directory):
 
     for img in data['images']:
         file_name = img['file_name']
-        #if file_name[5:7] in ['10','11','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']:
-            #continue
         img_id = img['id']
         img_width = img['width']
         img_height = img['height']
@@ -38,10 +36,14 @@ def convert_to_yolo(json_file, output_directory):
         yolo_annotations.append([f"{class_id} {center_x} {center_y} {norm_width} {norm_height}",img_id])
 
     for annotation in yolo_annotations:
-        newpath = output_directory + dict_img_id[annotation[1]][0][:-10]
+        video = dict_img_id[annotation[1]][0][:-11] #takes video's name (exemple: video10)
+        if video[-1] == "/":
+            video = video[:-1] #para casos com frames representados por mais de 5 digitos
+        frame = dict_img_id[annotation[1]][0][8:] #takes frames's name (exemple: frame_2640)
+        newpath = output_directory
         if not os.path.exists(newpath):
             os.makedirs(newpath)
-        file_path = output_directory + dict_img_id[annotation[1]][0] + ".txt"
+        file_path = output_directory + video + frame + ".txt"
         try:
             with open(file_path, 'a') as f:
                 f.write(annotation[0] + '\n')
@@ -51,4 +53,5 @@ def convert_to_yolo(json_file, output_directory):
 
 if __name__ == '__main__':
     # Example usage
-    convert_to_yolo('/home/umberto.pereira/Mosquitoes/dataset/v2/coco_json_folds/5folds/40m/coco_format_train3_tire.json', '/home/umberto.pereira/Mosquitoes/datasets/v2/labels/')
+    convert_to_yolo('/home/umberto.pereira/Mosquitoes/dataset/resized_images/coco_json_tires/coco_format_val0_tire_resized.json',
+                    '/home/umberto.pereira/Mosquitoes/dataset/resized_images/tire/fold1/labels/val/')

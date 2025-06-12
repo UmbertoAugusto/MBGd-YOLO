@@ -2,15 +2,16 @@ from ultralytics import YOLO
 import csv
 import os
 
-def TrainModel (model,dataset,experiment_name,epochs,patience,img_size,output_dir):
+def TrainModel (model,dataset,experiment_name,hyp_params,epochs,patience,output_dir):
     '''Realiza o trainamento do modelo.'''
     results = model.train(name=experiment_name,
-                          device=0, #mudar isso para vir do config file depois de testar
-                      data=dataset,
-                      epochs=epochs,
-                      imgsz=img_size,
-                      patience=patience,
-                      project=output_dir)
+                        device=0, #mudar isso para vir do config file depois de testar
+                        data=dataset,
+                        cfg=hyp_params,
+                        epochs=epochs,
+                        patience=patience,
+                        project=output_dir,
+                        optimizer="Adam")
     return results
 
 def ConfidenceThresholdOptimization (model,dataset,output_dir,experiment_name):

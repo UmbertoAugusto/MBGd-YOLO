@@ -1,12 +1,15 @@
-EXPERIMENT_NAME: "base_redimensionada_organizacao_original_teste3"
+EXPERIMENT_NAME: "mudancas_parametros_Mila_teste1" #"base_redimensionada_organizacao_original_teste3"
+
 PRE_TRAINED_MODEL: "yolov8n.pt"
+PARAMS: "/home/umberto.pereira/Mosquitoes/YOLO/configs/hparams.yaml" #path to hparams.yaml
 EPOCHS: 5000
-IMAGE_SIZE: 640
 PATIENCE: 20
 OUTPUT_DIR: "/home/umberto.pereira/Mosquitoes/YOLO/outputs"
+
 NUM_FOLDS: 2
-OBJECT: "tire"
-DATASET:
+OBJECT: "tire" #only 1 object permited
+
+DATASET: #put paths to all datasets here
   TIRE:
     #uncomment what you want yo use
     #MBGv2

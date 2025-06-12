@@ -1,14 +1,15 @@
 import yaml
-from utils import *
+from utils import TrainModel, ConfidenceThresholdOptimization
 import csv
 import argparse
 import os
+from ultralytics import YOLO
 
 #Argument parser
 parser = argparse.ArgumentParser(prog="MBGd with YOLO",description="MBG Eval")
 parser.add_argument("--config-file", default=None, help="path to config.yaml")
-parser.add_argument("--object", default=None, help="object to detect")
 parser.add_argument("--fold", default=None, help="current fold number")
+parser.add_argument("--object", default=None, help="object to detect")
 args = parser.parse_args()
 #set the dataset and config file paths
 config_file = args.config_file
@@ -19,22 +20,20 @@ obj = args.object
 with open(config_file, 'r') as f:
     config = yaml.load(f, Loader=yaml.SafeLoader)
 
-pre_trained_model = config['PRE_TRAINED_MODEL']
+#get arguments from config file
 experiment_name = config['EXPERIMENT_NAME']
+pre_trained_model = config['PRE_TRAINED_MODEL']
+path_hparams = config ['PARAMS']
 epochs = config['EPOCHS']
-img_size = config['IMAGE_SIZE']
 patience = config['PATIENCE']
 output_dir = config['OUTPUT_DIR']
-num_folds = config['NUM_FOLDS']
 dataset= config['DATASET'][obj.upper()][f'FOLD{fold_number}']
 
 #dataset for simple tests
-#uncomment to use this simple and small dataset
+#uncomment line below to use this simple and small dataset
 #dataset = config['DATASET']["TIRE"]['teste'] #remove when tests are finished
 
-best_F1_scores = {}
-best_conf_scores = {}
-result_data = [['fold','score','F1']]
+result_data = [['fold','score','F1']] #header for .csv file with results
 
 #train model
 model = YOLO(pre_trained_model)
@@ -43,10 +42,10 @@ result_path_train = experiment_name+'/fold'+str(fold_number)+'/train'
 results_train = TrainModel(model=model,
                            dataset=dataset,
                            experiment_name=result_path_train,
+                           hyp_params=path_hparams,
                            epochs=epochs,
                            patience=patience,
-                           img_size=img_size,
-                           output_dir=output_dir,)
+                           output_dir=output_dir)
 
 #search for best confidence score
 model_to_evaluate = YOLO(str(results_train.save_dir) + '/weights/best.pt')
