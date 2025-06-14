@@ -32,7 +32,7 @@ def ConfidenceThresholdOptimization (model,dataset,output_dir,experiment_name):
         print("////////////////////////////////////////////////")
         print("F1 PARA TAU = ", tau, ": ", F1)
         print("////////////////////////////////////////////////")
-        if F1 > best_F1:
+        if F1 >= best_F1:
             best_tau = tau
             best_F1 = F1
     return best_tau, best_F1
