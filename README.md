@@ -10,8 +10,49 @@ The code presented here was used in [@felipe-brrt](https://github.com/felipe-brr
 
 ## Installation
 
+This project was developed and tested using the following specifications. To ensure the full reproducibility of the results, it is strongly recommended to use the same version of Python and the libraries listed in the `requirements.txt` file. However, the code does not rely on specific features that are prone to breaking in newer versions. The project is therefore likely to work with newer versions of Python (e.g., 3.9+) and the listed libraries. If you choose to use newer versions, please be aware that unexpected behavior may occur, or that minor code adjustments may be required.
+
 ### Requirements
-In progress...
+- CUDA 11.8+
+- Python 3.8+
+- Conda
+- Linux system to run bash script files
+
+### Installation Steps
+Check if you have the necessary requirements and run the following command:
+1.  **Create and activate the Conda environment:**
+
+    ```bash
+    conda create -n mbgd-yolo python=3.8
+    conda activate mbgd-yolo
+    ```
+
+2.  **Install PyTorch (Important!)**
+
+    You must install the PyTorch version that matches your system's CUDA driver. Check your CUDA version by running `nvidia-smi` in the terminal.
+
+    * **For CUDA 11.8 (used in this project):**
+        ```bash
+        pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+        ```
+
+    * **For CUDA 12.1 (for newer GPUs):**
+        ```bash
+        pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+        ```
+
+    * **For CPU-only installation:**
+        ```bash
+        pip install torch torchvision torchaudio
+        ```
+    > For other versions, please visit the [official PyTorch website](https://pytorch.org/get-started/locally/).
+
+3.  **Install remaining project dependencies:**
+
+    Once PyTorch is correctly installed, install the other packages listed in `requirements.txt`.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Configurations File
 In progress...
