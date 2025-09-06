@@ -1,0 +1,75 @@
+#!/bin/bash
+
+cat << "EOF"
+  __  __ ____   _____ _____  
+ |  \/  |  _ \ / ____|  __ \ 
+ | \  / | |_) | |  __| |  | |
+ | |\/| |  _ <| | |_ | |  | |
+ | |  | | |_) | |__| | |__| |
+ |_|  |_|____/ \_____|_____/ 
+                             
+                             
+EOF
+echo " --- Welcome to MBGd workflow ! ---"
+echo " content: train and evaluate model to detect objects "
+
+# Load configurations from config.yaml
+CONFIG_FILE="configs/config.yaml"
+
+# Path to Local yq (linux)
+YQ_LOCAL="./yq"
+
+# Verifica se o yq local existe
+if [ ! -f "$YQ_LOCAL" ]; then
+    echo "yq not found. Downloading yq..."
+    wget https://github.com/mikefarah/yq/releases/download/v4.35.2/yq_linux_amd64 -O yq
+    chmod +x yq
+fi
+
+# Extract values from config.yaml usando yq local
+OBJ=$($YQ_LOCAL e '.OBJECT' $CONFIG_FILE)
+FOLDS=$($YQ_LOCAL e '.NUM_FOLDS' $CONFIG_FILE)
+
+# START MOSQUITOES WORKFLOW
+echo "Starting training workflow for ${OBJ} detection, ${FOLDS} folds."
+echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+echo ""
+SECONDS=0
+
+for ((outter_fold=1; outter_fold<=FOLDS; outer_fold++)); do
+
+    echo ""
+    echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+    duration=$SECONDS
+    echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
+    echo ""
+
+    for ((inner_fold=1; inner_fold<=FOLDS; inner_fold++)); do
+        if (( inner_fold == outter_fold )); then
+            continue
+        fi
+        echo "Running nested_train_and_val.py with fold $inner_fold for validation and fold $outter_fold excluded for later test"
+        CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python codes/nested_train_and_val.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-for-test "$outter_fold" --fold-for-validation "$inner_fold"
+        echo ""
+        echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+        duration=$SECONDS
+        echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
+        echo ""
+    
+    echo "Running nested_train_and_test.py with fold $outter_fold for test"
+    CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python codes/nested_train_and_test.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-test "$outter_fold"
+    echo ""
+    echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+    duration=$SECONDS
+    echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
+    echo ""
+
+done
+
+# FINISH MOSQUITOES WORKFLOW
+echo ""
+echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
+duration=$SECONDS
+echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
+echo ""
+echo "Training workflow completed."
