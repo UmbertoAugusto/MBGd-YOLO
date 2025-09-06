@@ -33,9 +33,8 @@ dataset= config['DATASET'][obj.upper()][f'FOLD{fold_number}']
 #uncomment line below to use this simple and small dataset
 #dataset = config['DATASET']["TIRE"]['teste'] #remove when tests are finished
 
-result_data = [['fold','score','F1']] #header for .csv file with results
-
-#train model
+#----------------------------------------------------------------------------------------------------
+#training model
 model = YOLO(pre_trained_model)
 
 result_path_train = experiment_name+'/fold'+str(fold_number)+'/train'
@@ -47,6 +46,7 @@ results_train = TrainModel(model=model,
                            patience=patience,
                            output_dir=output_dir)
 
+#----------------------------------------------------------------------------------------------------
 #search for best confidence score
 model_to_evaluate = YOLO(str(results_train.save_dir) + '/weights/best.pt')
 
@@ -57,17 +57,17 @@ best_conf_score, best_F1_score = ConfidenceThresholdOptimization(model=model_to_
                                                                  experiment_name=result_path_val)
 
 #Saving result metrics
+result_data = [['fold','score','F1']] #header for .csv file
 result_data.append([fold_number,best_conf_score,best_F1_score])
 #Writing file
-metrics_file_path = output_dir+'/'+experiment_name+'/fold'+str(fold_number)+'/metrics.txt'
+metrics_file_path = output_dir+'/'+experiment_name+'/fold'+str(fold_number)+'/val_metrics.txt'
 with open(metrics_file_path, mode='w') as file:
     file.write(f"Fold {fold_number}\nscore: {best_conf_score}\nF1: {best_F1_score}")
 
-
 #Saving metrics of all folds
-csv_file_path = output_dir+'/'+experiment_name+'/metrics.csv'
+csv_file_path = output_dir+'/'+experiment_name+'/val_metrics.csv'
 
-write_titles = False #indica se precisa escrever nome das colunas ainda
+write_titles = False #indicates if it is needed to write csv file header
 if not os.path.exists(csv_file_path):
     write_titles = True 
 
