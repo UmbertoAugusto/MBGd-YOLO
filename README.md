@@ -8,6 +8,8 @@ The present work is part of a long-running research project involving several un
 
 The code presented here was used in [@felipe-brrt](https://github.com/felipe-brrt) Bachelor's Thesis to evaluate the advantages of YOLOv8 over Faster-RCNN. Another significant contribution from the group was a new approach to processing the dataset. High-resolution images are now tiled into smaller ones, preventing the neural network from having to downscale them. As a result, the objects of interest are no longer reduced in size, making their identification easier.
 
+This repository implements the YOLOv8 model and introduces a key methodological innovation: nested k-fold cross-validation. This approach provides a more rigorous and unbiased evaluation of the model's performance, ensuring our results are more realistic and generalizable to unseen data.
+
 ## Installation
 
 This project was developed and tested using the following specifications. To ensure the full reproducibility of the results, it is strongly recommended to use the same version of Python and the libraries listed in the `requirements.txt` file. However, the code does not rely on specific features that are prone to breaking in newer versions. The project is therefore likely to work with newer versions of Python (e.g., 3.9+) and the listed libraries. If you choose to use newer versions, please be aware that unexpected behavior may occur, or that minor code adjustments may be required.
@@ -59,25 +61,32 @@ In progress...
 
 
 ## Running the Project
+This project features two distinct scripts. The first, `train_val.sh`, follows the original methodology, performing only training and validation. The second script, `nested_workflow.sh`, introduces an improved approach with nested k-fold cross-validation.
 
 ### 1. Make the Script Executable
-First, make sure the bash script has the correct permissions. You only need to do this once.
+First, make sure the bash scripts have the correct permissions. You only need to do this once.
 ```bash
-chmod +x <full_path_to_training.sh>
+chmod +x <full_path_to_train_val.sh>
+chmod +x <full_path_to_nested_workflow.sh>
 ```
 
 ### 2. (Optional) Fix Line Endings
 If you have cloned or edited the project on a Windows machine, you might encounter issues with line endings when running the script on Linux. To fix this, run the following command:
 ```bash
-sed -i 's/\r$//' scripts/training_mosquitoes.sh
+sed -i 's/\r$//' scripts/train_val.sh
+sed -i 's/\r$//' scripts/nested_workflow.sh
 ```
 
 ### 3. Start the Training
 Now you can run the code from the main directory. To run the training process in the background (so it continues even if you close the terminal), use the `nohup` command.
 ```bash
-nohup bash scripts/training.sh > train+test.log 2>&1 &
+#if you want to run train and validation:
+nohup bash scripts/train_val.sh > log_out.log 2>&1 &
+
+#if you want to do train, validation and test:
+nohup bash scripts/nested_workflow.sh > log_out.log 2>&1 &
 ```
-And the outputs will be saved at `train+test.log` file in real time. You can monitore it.
+And the outputs will be saved at `log_out.log` file in real time. You can monitore it.
 
 ### 4. Stop the Training Process
 If you need to interrupt the workflow, just run the following command.
