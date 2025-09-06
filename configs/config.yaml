@@ -1,4 +1,4 @@
-EXPERIMENT_NAME: "hparams_Mila_base_cortada_teste3"
+EXPERIMENT_NAME: "test1_requirements_txt"
 
 PRE_TRAINED_MODEL: "yolov8s.pt"
 PARAMS: "/home/umberto.pereira/Mosquitoes/YOLO/configs/hparams.yaml" #path to hparams.yaml
@@ -6,13 +6,13 @@ EPOCHS: 5000
 PATIENCE: 20
 OUTPUT_DIR: "/home/umberto.pereira/Mosquitoes/YOLO/outputs"
 
-NUM_FOLDS: 5
+NUM_FOLDS: 1
 OBJECT: "tire" #only 1 object permited
 
 DATASET: #put paths to all datasets here
   TIRE:
     #uncomment what you want yo use
-    #MBGv2
+    #original MBGv2
     #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold1.yaml
     #FOLD2: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold2.yaml
     #FOLD3: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_fold3.yaml
@@ -21,17 +21,12 @@ DATASET: #put paths to all datasets here
     #teste
     teste: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_test.yaml
 
-    #cropped images
-    FOLD1: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold1/10/mosquito_tire_fold1_0067.yaml
-    FOLD2: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold2/10/mosquito_tire_fold2_0067.yaml
-    FOLD3: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold3/10/mosquito_tire_fold3_0067.yaml
-    FOLD4: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold4/10/mosquito_tire_fold4_0067.yaml
-    FOLD5: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold5/10/mosquito_tire_fold5_0067.yaml
-
-    #MBGv2 resized and reorganized
-    #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_fold1.yaml
-    #MBGv2 reorganized
-    #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_reorganized_fold1.yaml
+    #tiled images
+    FOLD1: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold1/00/mosquito_tire_fold1_0067.yaml
+    FOLD2: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold2/00/mosquito_tire_fold2_0067.yaml
+    FOLD3: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold3/00/mosquito_tire_fold3_0067.yaml
+    FOLD4: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold4/00/mosquito_tire_fold4_0067.yaml
+    FOLD5: /home/umberto.pereira/Mosquitoes/dataset/sahi/fold5/00/mosquito_tire_fold5_0067.yaml
 
     #MBGv2 resized and original organization
     #FOLD1: /home/umberto.pereira/Mosquitoes/YOLO/configs/datasets_configs/dataset_resized_original_organization_fold1.yaml
