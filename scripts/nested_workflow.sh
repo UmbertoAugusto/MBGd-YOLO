@@ -48,21 +48,13 @@ for ((outter_fold=1; outter_fold<=FOLDS; outer_fold++)); do
         if (( inner_fold == outter_fold )); then
             continue
         fi
-        echo "Running nested_train_and_val.py with fold $inner_fold for validation and fold $outter_fold excluded for later test"
-        CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python codes/nested_train_and_val.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-for-test "$outter_fold" --fold-for-validation "$inner_fold"
+        echo "Running nested_train_val_test.py with fold $inner_fold for validation and fold $outter_fold excluded for later test"
+        CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python codes/nested_train_val_test.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-for-test "$outter_fold" --fold-for-validation "$inner_fold"
         echo ""
         echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
         duration=$SECONDS
         echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
         echo ""
-    
-    echo "Running nested_train_and_test.py with fold $outter_fold for test"
-    CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python codes/nested_train_and_test.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-test "$outter_fold"
-    echo ""
-    echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
-    duration=$SECONDS
-    echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
-    echo ""
 
 done
 

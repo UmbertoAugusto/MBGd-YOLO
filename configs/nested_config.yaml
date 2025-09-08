@@ -13,32 +13,27 @@ DATASET: #put paths to all datasets here
   TIRE:
     #uncomment what you want yo use
     TEST_FOLD1:
-      VAL_FOLD2: "/home/umberto.pereira/Mosquitoes/YOLO/configs/nested_dataset_files/train345_val2.yaml"
+      VAL_FOLD2: "/home/umberto.pereira/Mosquitoes/YOLO/configs/nested_dataset_files/train345_val2.yaml" #just exemple, change after creating yaml file
       VAL_FOLD3: "/home/umberto.pereira/Mosquitoes/YOLO/configs/nested_dataset_files/train245_val3.yaml"
       VAL_FOLD4: "/home/umberto.pereira/Mosquitoes/YOLO/configs/nested_dataset_files/train235_val4.yaml"
       VAL_FOLD5: "/home/umberto.pereira/Mosquitoes/YOLO/configs/nested_dataset_files/train234_val5.yaml"
-      FINAL_TRAIN_TEST: "/home/umberto.pereira/Mosquitoes/YOLO/configs/nested_dataset_files/train2345_test1.yaml"
     TEST_FOLD2:
       VAL_FOLD2: ""
       VAL_FOLD3: ""
       VAL_FOLD4: ""
       VAL_FOLD5: ""
-      FINAL_TRAIN_TEST: ""
     TEST_FOLD3:
       VAL_FOLD2: ""
       VAL_FOLD3: ""
       VAL_FOLD4: ""
       VAL_FOLD5: ""
-      FINAL_TRAIN_TEST: ""
     TEST_FOLD4:
       VAL_FOLD2: ""
       VAL_FOLD3: ""
       VAL_FOLD4: ""
       VAL_FOLD5: ""
-      FINAL_TRAIN_TEST: ""
     TEST_FOLD5:
       VAL_FOLD2: ""
       VAL_FOLD3: ""
       VAL_FOLD4: ""
       VAL_FOLD5: ""
-      FINAL_TRAIN_TEST: ""
