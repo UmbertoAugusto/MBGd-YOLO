@@ -36,26 +36,23 @@ echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
 echo ""
 SECONDS=0
 
-for ((outter_fold=1; outter_fold<=FOLDS; outer_fold++)); do
-
-    echo ""
-    echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
-    duration=$SECONDS
-    echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
-    echo ""
+for ((outer_fold=1; outer_fold<=FOLDS; outer_fold++)); do
 
     for ((inner_fold=1; inner_fold<=FOLDS; inner_fold++)); do
-        if (( inner_fold == outter_fold )); then
+        if (( inner_fold == outer_fold )); then
             continue
         fi
-        echo "Running nested_train_val_test.py with fold $inner_fold for validation and fold $outter_fold excluded for later test"
-        CUDA_VISIBLE_DEVICES=$CUDA_DEVICE python codes/nested_train_val_test.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-for-test "$outter_fold" --fold-for-validation "$inner_fold"
+
         echo ""
         echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
         duration=$SECONDS
         echo "Time spent: $((duration / 3600)) hours, $(((duration / 60) % 60)) minutes and $((duration % 60)) seconds"
         echo ""
 
+        echo "Running nested_train_val_test.py with fold $inner_fold for validation and fold $outer_fold excluded for later test"
+        python codes/nested_train_val_test.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-for-test "$outer_fold" --fold-for-validation "$inner_fold"
+
+    done
 done
 
 # FINISH MOSQUITOES WORKFLOW
