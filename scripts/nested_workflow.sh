@@ -14,7 +14,7 @@ echo " --- Welcome to MBGd workflow ! ---"
 echo " content: train and evaluate model to detect objects "
 
 # Load configurations from config.yaml
-CONFIG_FILE="configs/config.yaml"
+CONFIG_FILE="configs/nested_config.yaml"
 
 # Path to Local yq (linux)
 YQ_LOCAL="./yq"
@@ -38,7 +38,7 @@ SECONDS=0
 
 for ((outer_fold=1; outer_fold<=FOLDS; outer_fold++)); do
 
-    for ((inner_fold=1; inner_fold<=FOLDS; inner_fold++)); do
+    for ((inner_fold=1; inner_fold<=5; inner_fold++)); do
         if (( inner_fold == outer_fold )); then
             continue
         fi
