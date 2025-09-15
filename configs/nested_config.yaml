@@ -1,39 +1,39 @@
-EXPERIMENT_NAME: "test1_requirements_txt"
+EXPERIMENT_NAME: "yolo_resized_tires_2folds"
 
 PRE_TRAINED_MODEL: "yolov8s.pt"
 PARAMS: "/home/umberto.pereira/Mosquitoes/YOLO/configs/hparams.yaml" #path to hparams.yaml
-EPOCHS: 5000
+EPOCHS: 1000
 PATIENCE: 20
 OUTPUT_DIR: "/home/umberto.pereira/Mosquitoes/YOLO/outputs"
 
-NUM_FOLDS: 1
+NUM_FOLDS: 2
 OBJECT: "tire" #only 1 object permited, must be an object listed in dataset
 
 DATASET: #put paths to all datasets here
   TIRE:
     #uncomment what you want yo use
     TEST_FOLD1:
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer1_inner2.yaml" #just exemple, change after creating yaml file
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer1_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer1_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer1_inner5.yaml"
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer1_inner2.yaml" #just exemple, change after creating yaml file
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer1_inner3.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer1_inner4.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer1_inner5.yaml"
     TEST_FOLD2:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer2_inner1.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer2_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer2_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer2_inner5.yaml"
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer2_inner1.yaml"
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer2_inner3.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer2_inner4.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer2_inner5.yaml"
     TEST_FOLD3:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer3_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer3_inner2.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer3_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer3_inner5.yaml"
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer3_inner1.yaml"
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer3_inner2.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer3_inner4.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer3_inner5.yaml"
     TEST_FOLD4:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer4_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer4_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer4_inner3.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer4_inner5.yaml"
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer4_inner1.yaml"
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer4_inner2.yaml"
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer4_inner3.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer4_inner5.yaml"
     TEST_FOLD5:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer5_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer5_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer5_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/yaml_train_val_test/splits_yolo_hybrid/outer5_inner4.yaml"
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer5_inner1.yaml"
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer5_inner2.yaml"
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer5_inner3.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_hybrid/outer5_inner4.yaml"
