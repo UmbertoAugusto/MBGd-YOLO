@@ -12,7 +12,7 @@ imgsz: 640
 device: 0
 save_crop: True
 show_boxes: True
-batch: 32   # batch size
+batch: 16   # batch size
 seed: 1234
 
 
