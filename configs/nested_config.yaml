@@ -37,3 +37,30 @@ DATASET: #put paths to all datasets here
       VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val2/data_outer5_inner2.yaml"
       VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val3/data_outer5_inner3.yaml"
       VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val4/data_outer5_inner4.yaml"
+  WATERTANK:
+    #uncomment what you want yo use
+    TEST_FOLD1:
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val2/data_outer1_inner2.yaml"
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val3/data_outer1_inner3.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val4/data_outer1_inner4.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val5/data_outer1_inner5.yaml"
+    TEST_FOLD2:
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val1/data_outer2_inner1.yaml"
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val3/data_outer2_inner3.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val4/data_outer2_inner4.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val5/data_outer2_inner5.yaml"
+    TEST_FOLD3:
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val1/data_outer3_inner1.yaml"
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val2/data_outer3_inner2.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val4/data_outer3_inner4.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val5/data_outer3_inner5.yaml"
+    TEST_FOLD4:
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val1/data_outer4_inner1.yaml"
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val2/data_outer4_inner2.yaml"
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val3/data_outer4_inner3.yaml"
+      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val5/data_outer4_inner5.yaml"
+    TEST_FOLD5:
+      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val1/data_outer5_inner1.yaml"
+      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val2/data_outer5_inner2.yaml"
+      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val3/data_outer5_inner3.yaml"
+      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val4/data_outer5_inner4.yaml"
