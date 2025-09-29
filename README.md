@@ -57,8 +57,38 @@ Check if you have the necessary requirements and run the following command:
     ```
 
 ## Configurations File
-In progress...
 
+### Dataset Configs
+These files follow the official **YOLO documentation format**. A unique dataset configuration (`.yaml`) file is required for each data split. Since this repository contains two different training methodologies, please check the requirements for the script you intend to use:
+
+* **For the Nested K-Fold Script:** This methodology uses a 5x4 nested cross-validation setup, which results in 20 distinct training/validation combinations. Therefore, it requires **20 separate configuration files** to run correctly.
+
+* **For the Simple K-Fold Script (Legacy):** This script runs a standard 5-fold cross-validation and requires only **5 configuration files**, one for each fold.
+
+### hparams.yaml
+This file contains the **hyperparameters** for the YOLO model, such as data augmentation, image size, and batch size. For a complete list of options, please visit the official [Ultralytics documentation](https://docs.ultralytics.com/).
+
+### config.yaml
+This is the main configuration file for the **k-fold methodology**.
+
+* `OUTPUT_DIR`: Defines the directory where all outputs will be saved. Inside this path, a new folder will be created with the name specified in `EXPERIMENT_NAME`.
+
+* `EPOCHS`:Sets the maximum number of iterations for training.
+
+* `PATIENCE`: Defines the number of consecutive epochs with no significant improvement to wait before stopping the training early. For example, if `PATIENCE` is set to 20, the training will halt after 20 epochs without improvement.
+
+* `PRE_TRAINED_MODELFeel`: Feel free to change the pre-trained model for a new experiment. However, be aware that this may require additional changes in other files.
+
+* `NUM_FOLDS`: Sets the total number of runs to perform. Each run consists of a training and a validation phase.
+
+* `OBJECT` Specifies the object class you want to detect. Currently, only one class is supported at a time.
+
+* `DATASET`: **Pay attention** to this variable. Ensure that it points to the correct path of the dataset's configuration `.yaml` file; otherwise, the code will fail to run.
+
+### nested_config.yaml
+This is the main configuration file for the **nested k-fold methodology**. Its structure is nearly identical to `config.yaml`, sharing most of the same parameters.
+
+The primary difference is in how the dataset configuration paths are defined, which is structured to support the multiple data splits required by the nested k-fold process.
 
 ## Running the Project
 This project features two distinct scripts. The first, `train_val.sh`, follows the original methodology, performing only training and validation. The second script, `nested_workflow.sh`, introduces an improved approach with nested k-fold cross-validation.
