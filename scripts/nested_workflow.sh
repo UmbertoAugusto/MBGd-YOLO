@@ -29,9 +29,10 @@ fi
 # Extract values from config.yaml usando yq local
 OBJ=$($YQ_LOCAL e '.OBJECT' $CONFIG_FILE)
 FOLDS=$($YQ_LOCAL e '.NUM_FOLDS' $CONFIG_FILE)
+DATA=$($YQ_LOCAL e '.DATA' $CONFIG_FILE)
 
 # START MOSQUITOES WORKFLOW
-echo "Starting training workflow for ${OBJ} detection, ${FOLDS} folds."
+echo "Starting training workflow for ${OBJ} detection, ${FOLDS} folds, with ${DATA} data."
 echo "Current date and time: $(date +"%Y-%m-%d %H:%M:%S")"
 echo ""
 SECONDS=0
@@ -50,7 +51,7 @@ for ((outer_fold=1; outer_fold<=FOLDS; outer_fold++)); do
         echo ""
 
         echo "Running nested_train_val_test.py with fold $inner_fold for validation and fold $outer_fold excluded for later test"
-        python codes/nested_train_val_test.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-for-test "$outer_fold" --fold-for-validation "$inner_fold"
+        python codes/nested_train_val_test.py --config-file $CONFIG_FILE --object "${OBJ}" --fold-for-test "$outer_fold" --fold-for-validation "$inner_fold" --data "${DATA}"
 
     done
 done

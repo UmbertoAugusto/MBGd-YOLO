@@ -1,66 +1,130 @@
-EXPERIMENT_NAME: "yolo_resized_tires_2folds"
+EXPERIMENT_NAME: "yolo_tiled_tires_1folds"
 
 PRE_TRAINED_MODEL: "yolov8s.pt"
 PARAMS: "/home/umberto.pereira/Mosquitoes/YOLO/configs/hparams.yaml" #path to hparams.yaml
 EPOCHS: 1000
 PATIENCE: 20
-OUTPUT_DIR: "/home/umberto.pereira/Mosquitoes/YOLO/outputs"
+OUTPUT_DIR: "/home/umberto.pereira/data/Umberto/YOLO/outputs"
 
-NUM_FOLDS: 5
+NUM_FOLDS: 1
 OBJECT: "tire" #only 1 object permited, must be an object listed in dataset
+DATA: "tiled" #integer or tiled
 
 DATASET: #put paths to all datasets here
-  TIRE:
-    #uncomment what you want yo use
-    TEST_FOLD1:
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val2/data_outer1_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val3/data_outer1_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val4/data_outer1_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val5/data_outer1_inner5.yaml"
-    TEST_FOLD2:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val1/data_outer2_inner1.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val3/data_outer2_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val4/data_outer2_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val5/data_outer2_inner5.yaml"
-    TEST_FOLD3:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val1/data_outer3_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val2/data_outer3_inner2.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val4/data_outer3_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val5/data_outer3_inner5.yaml"
-    TEST_FOLD4:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val1/data_outer4_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val2/data_outer4_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val3/data_outer4_inner3.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val5/data_outer4_inner5.yaml"
-    TEST_FOLD5:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val1/data_outer5_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val2/data_outer5_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val3/data_outer5_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val4/data_outer5_inner4.yaml"
-  WATERTANK:
-    #uncomment what you want yo use
-    TEST_FOLD1:
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val2/data_outer1_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val3/data_outer1_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val4/data_outer1_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val5/data_outer1_inner5.yaml"
-    TEST_FOLD2:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val1/data_outer2_inner1.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val3/data_outer2_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val4/data_outer2_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val5/data_outer2_inner5.yaml"
-    TEST_FOLD3:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val1/data_outer3_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val2/data_outer3_inner2.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val4/data_outer3_inner4.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val5/data_outer3_inner5.yaml"
-    TEST_FOLD4:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val1/data_outer4_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val2/data_outer4_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val3/data_outer4_inner3.yaml"
-      VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val5/data_outer4_inner5.yaml"
-    TEST_FOLD5:
-      VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val1/data_outer5_inner1.yaml"
-      VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val2/data_outer5_inner2.yaml"
-      VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val3/data_outer5_inner3.yaml"
-      VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val4/data_outer5_inner4.yaml"
+  INTEGER:
+    TIRE:
+      TEST_FOLD1:
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val2/data_outer1_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val3/data_outer1_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val4/data_outer1_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer1/inner_val5/data_outer1_inner5.yaml"
+      TEST_FOLD2:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val1/data_outer2_inner1.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val3/data_outer2_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val4/data_outer2_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer2/inner_val5/data_outer2_inner5.yaml"
+      TEST_FOLD3:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val1/data_outer3_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val2/data_outer3_inner2.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val4/data_outer3_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer3/inner_val5/data_outer3_inner5.yaml"
+      TEST_FOLD4:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val1/data_outer4_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val2/data_outer4_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val3/data_outer4_inner3.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer4/inner_val5/data_outer4_inner5.yaml"
+      TEST_FOLD5:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val1/data_outer5_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val2/data_outer5_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val3/data_outer5_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/tire/splits_yolo_tire_labeled/outer5/inner_val4/data_outer5_inner4.yaml"
+    WATERTANK:
+      TEST_FOLD1:
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val2/data_outer1_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val3/data_outer1_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val4/data_outer1_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer1/inner_val5/data_outer1_inner5.yaml"
+      TEST_FOLD2:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val1/data_outer2_inner1.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val3/data_outer2_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val4/data_outer2_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer2/inner_val5/data_outer2_inner5.yaml"
+      TEST_FOLD3:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val1/data_outer3_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val2/data_outer3_inner2.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val4/data_outer3_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer3/inner_val5/data_outer3_inner5.yaml"
+      TEST_FOLD4:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val1/data_outer4_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val2/data_outer4_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val3/data_outer4_inner3.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer4/inner_val5/data_outer4_inner5.yaml"
+      TEST_FOLD5:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val1/data_outer5_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val2/data_outer5_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val3/data_outer5_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/resized_images/watertank/splits_yolo_watertank/outer5/inner_val4/data_outer5_inner4.yaml"
+        
+  TILED:
+    TIRE:
+      ORIGINAL_JSON_FOLD1: "/nfs/proc/projeto.dpcm/mbgv2a/tire/coco_json_tire/coco_format_test1_tire.json"
+      ORIGINAL_JSON_FOLD2: "/nfs/proc/projeto.dpcm/mbgv2a/tire/coco_json_tire/coco_format_test2_tire.json"
+      ORIGINAL_JSON_FOLD3: "/nfs/proc/projeto.dpcm/mbgv2a/tire/coco_json_tire/coco_format_test3_tire.json"
+      ORIGINAL_JSON_FOLD4: "/nfs/proc/projeto.dpcm/mbgv2a/tire/coco_json_tire/coco_format_test4_tire.json"
+      ORIGINAL_JSON_FOLD5: "/nfs/proc/projeto.dpcm/mbgv2a/tire/coco_json_tire/coco_format_test5_tire.json"
+      TEST_FOLD1:
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer1/inner_val2/data_outer1_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer1/inner_val3/data_outer1_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer1/inner_val4/data_outer1_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer1/inner_val5/data_outer1_inner5.yaml"
+      TEST_FOLD2:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer2/inner_val1/data_outer2_inner1.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer2/inner_val3/data_outer2_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer2/inner_val4/data_outer2_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer2/inner_val5/data_outer2_inner5.yaml"
+      TEST_FOLD3:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer3/inner_val1/data_outer3_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer3/inner_val2/data_outer3_inner2.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer3/inner_val4/data_outer3_inner4.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer3/inner_val5/data_outer3_inner5.yaml"
+      TEST_FOLD4:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer4/inner_val1/data_outer4_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer4/inner_val2/data_outer4_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer4/inner_val3/data_outer4_inner3.yaml"
+        VAL_FOLD5: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer4/inner_val5/data_outer4_inner5.yaml"
+      TEST_FOLD5:
+        VAL_FOLD1: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer5/inner_val1/data_outer5_inner1.yaml"
+        VAL_FOLD2: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer5/inner_val2/data_outer5_inner2.yaml"
+        VAL_FOLD3: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer5/inner_val3/data_outer5_inner3.yaml"
+        VAL_FOLD4: "/nfs/proc/projeto.dpcm/mbgv2a/tiles/tire/splits_yolo_tire_tiled/outer5/inner_val4/data_outer5_inner4.yaml"
+    WATERTANK:
+      ORIGINAL_JSON_FOLD2:
+      ORIGINAL_JSON_FOLD2: 
+      ORIGINAL_JSON_FOLD2: 
+      ORIGINAL_JSON_FOLD2: 
+      ORIGINAL_JSON_FOLD2: 
+      TEST_FOLD1:
+        VAL_FOLD2:
+        VAL_FOLD3: 
+        VAL_FOLD4: 
+        VAL_FOLD5: 
+      TEST_FOLD2:
+        VAL_FOLD1: 
+        VAL_FOLD3: 
+        VAL_FOLD4: 
+        VAL_FOLD5: 
+      TEST_FOLD3:
+        VAL_FOLD1: 
+        VAL_FOLD2: 
+        VAL_FOLD4: 
+        VAL_FOLD5: 
+      TEST_FOLD4:
+        VAL_FOLD1: 
+        VAL_FOLD2: 
+        VAL_FOLD3: 
+        VAL_FOLD5: 
+      TEST_FOLD5:
+        VAL_FOLD1: 
+        VAL_FOLD2: 
+        VAL_FOLD3: 
+        VAL_FOLD4: 

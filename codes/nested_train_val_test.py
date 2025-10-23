@@ -11,12 +11,14 @@ parser.add_argument("--config-file", default=None, help="path to config.yaml")
 parser.add_argument("--fold-for-test", default=None, help="outer loop test fold number")
 parser.add_argument("--fold-for-validation", default=None, help="inner loop validation fold number")
 parser.add_argument("--object", default=None, help="object to detect")
+parser.add_argument("--database", default=None, help="database to use: integer or tiled")
 args = parser.parse_args()
 #set the dataset and config file paths
 config_file = args.config_file
 fold_test = args.fold_for_test
 fold_val = args.fold_for_validation
 obj = args.object
+database = args.database
 
 # Load the general YAML configuration
 with open(config_file, 'r') as f:
@@ -29,7 +31,12 @@ path_hparams = config ['PARAMS']
 epochs = config['EPOCHS']
 patience = config['PATIENCE']
 output_dir = config['OUTPUT_DIR']
-dataset = config['DATASET'][obj.upper()][f'TEST_FOLD{fold_test}'][f'VAL_FOLD{fold_val}']
+dataset = config['DATASET'][database.upper()][obj.upper()][f'TEST_FOLD{fold_test}'][f'VAL_FOLD{fold_val}']
+original_annotations_val_json_path = ''
+original_annotations_test_json_path = ''
+if database.lower() == "tiled":
+    original_annotations_val_json_path = config['DATASET'][database.upper()][obj.upper()][f'ORIGINAL_JSON_FOLD{fold_val}']
+    original_annotations_test_json_path = config['DATASET'][database.upper()][obj.upper()][f'ORIGINAL_JSON_FOLD{fold_test}']
 
 #dataset for simple tests
 #uncomment line below to use this simple and small dataset
@@ -56,7 +63,9 @@ result_path_val = f'{experiment_name}/test_fold{fold_test}/val_fold{fold_val}/va
 best_conf, best_F1 = ConfidenceThresholdOptimization(model=model_to_evaluate,
                                                      dataset=dataset,
                                                      output_dir=output_dir,
-                                                     experiment_name=result_path_val)
+                                                     experiment_name=result_path_val,
+                                                     database=database,
+                                                     annotations_json_path=original_annotations_val_json_path)
 
 #----------------------------------------------------------------------------------------------------
 #Saving validation metrics
@@ -88,7 +97,9 @@ results_test = TestModel(model=model_to_evaluate,
                           dataset=dataset,
                           output_dir=output_dir,
                           experiment_name=result_path,
-                          conf_score = best_conf)
+                          conf_score = best_conf,
+                          database = database,
+                          annotations_json_path=original_annotations_test_json_path)
 
 TruePositives = results_test[0]
 FalsePositives = results_test[1]
@@ -96,13 +107,11 @@ FalseNegatives = results_test[2]
 Precision = results_test[3]
 Recall = results_test[4]
 F1 = results_test[5]
-mAP50_95 = results_test[6]
-mAP50 = results_test[7]
 
 #----------------------------------------------------------------------------------------------------
 #Saving test metrics
 result_data = [['fold_test','fold_val','conf_score','TP','FP','FN','Precision','Recall','F1','mAP@50-95','mAP@50']] #header for .csv file with results
-result_data.append([fold_test,fold_val,best_conf,TruePositives,FalsePositives,FalseNegatives,Precision,Recall,F1,mAP50_95,mAP50])
+result_data.append([fold_test,fold_val,best_conf,TruePositives,FalsePositives,FalseNegatives,Precision,Recall,F1])
 
 #Saving results of all folds together
 test_metrics_file_path = f'{output_dir}/{experiment_name}/test_results.csv'
