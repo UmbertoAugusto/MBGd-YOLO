@@ -15,66 +15,94 @@ def TrainModel (model,dataset,experiment_name,hyp_params,epochs,patience,output_
                         optimizer="Adam")
     return results
 
-def ConfidenceThresholdOptimization (model,dataset,output_dir,experiment_name,database,annotations_json_path,verbose=True):
-    '''Realiza a busca pelo melhor valor para o Confidence Threshold.'''
-    grid = range(10,102,2)
-    best_F1 = 0
-    best_tau = 0
-    for x in grid:
-        tau = x/100 #correcao para valores de 0.1 ate 1.0
-        results = model.val(data=dataset,
-                            split='val',
-                            project = output_dir,
-                            name = experiment_name,
-                            conf = tau,
-                            imgsz = 640,
-                            device = 0,
-                            batch=32,
-                            save_json=True)
+def ConfidenceThresholdOptimization(
+    model,
+    dataset,
+    output_dir,
+    experiment_name,
+    database,
+    annotations_json_path=None,
+    verbose=True,
+    device=0,
+    batch=32,
+    imgsz=640,
+):
+    """
+    #1 Varredura 1: taus = 0.10, 0.20, ..., 0.90  (9 avaliações)
+    #2 Varredura fina:   em torno do melhor tau da grossa, de (tau-0.08) a (tau+0.08) passo 0.02,
+                         limitado a [0.10, 0.90], excluindo o centro (8 avaliações)
+    Total de 17 avaliações.
+    """
+
+    def eval_tau(tau):
+        results = model.val(
+            data=dataset,
+            split='val',
+            project=output_dir,
+            name=f"{experiment_name}_tau_{str(tau).replace('.', 'p')}",
+            conf=float(tau),
+            imgsz=imgsz,
+            device=device,
+            batch=batch,
+            save_json=True,
+        )
+
         if database.lower() == "integer":
-            if len(results.box.f1)>0:
-                F1 = results.box.f1[0]
-            else:
-                F1 = 0
-            if verbose == True:
-                print("////////////////////////////////////////////////")
-                print("F1 PARA TAU = ", tau, ": ", F1)
-                print("////////////////////////////////////////////////")
-            if F1 >= best_F1:
-                best_tau = tau
-                best_F1 = F1
+            F1 = results.box.f1[0] if hasattr(results, "box") and len(getattr(results.box, "f1", [])) > 0 else 0.0
+            return float(F1), False
 
         elif database.lower() == "tiled":
-            save_directory = results.save_dir
-            json_preds_path = f"{save_directory}/predictions.json"
-            if not os.path.exists(json_preds_path):
-                # File does not exist -> no preds (from YOLO)
-                F1 = 0
-                if verbose == True:
+            save_directory = getattr(results, "save_dir", None)
+            json_preds_path = None if save_directory is None else os.path.join(save_directory, "predictions.json")
+            if not json_preds_path or not os.path.exists(json_preds_path):
+                if verbose:
                     print("////////////////////////////////////////////////")
-                    print(f"Arquivo predictions.json não criado para tau = {tau}. Assumindo F1 = 0.")
+                    print(f"predictions.json não criado para tau = {tau:.2f}. F1 = 0. Interrompendo coarse.")
                     print("////////////////////////////////////////////////")
-                    break #confidence score too high to make a detection, stop searching
-            metrics = PostProcessingTiledImages(pred_json_path = json_preds_path,
-                                                original_annotations_json_path = annotations_json_path,
-                                                confidence_threshold = tau)
-            F1 = metrics['F1']
-            if verbose == True:
-                print("////////////////////////////////////////////////")
-                print("F1 PARA TAU = ", tau, ": ", F1)
-                print("////////////////////////////////////////////////")
-            if F1 >= best_F1:
-                best_tau = tau
-                best_F1 = F1
+                return 0.0, True
+            metrics = PostProcessingTiledImages(
+                pred_json_path=json_preds_path,
+                original_annotations_json_path=annotations_json_path,
+                confidence_threshold=float(tau),
+            )
+            F1 = float(metrics.get("F1", 0.0))
+            return F1, False
+
+        else:
+            raise ValueError("database deve ser 'integer' ou 'tiled'.")
+
+    # PRIMEIRO LOOP 
+    coarse_taus = [round(x/100, 2) for x in range(10, 100, 10)]  # 0.10..0.90
+    best_tau, best_F1 = 0.0, 0.0
+
+    for tau in coarse_taus:
+        F1, stop = eval_tau(tau)
+        if verbose:
+            print(f"[COARSE] tau={tau:.2f}  F1={F1:.6f}")
+        if F1 >= best_F1:
+            best_F1, best_tau = F1, tau
+        if stop:
+            break 
+
+    # SEGUNDO LOOP
+    f_start = max(0.10, round(best_tau - 0.08, 2))
+    f_end   = min(0.90, round(best_tau + 0.08, 2))
+    fine_taus = []
+    t = f_start
+    while t <= f_end + 1e-9:
+        t = round(t, 2)
+        if abs(t - best_tau) > 1e-12:  # exclui o centro, pois ja avaliado
+            fine_taus.append(t)
+        t += 0.02
+
+    for tau in fine_taus:
+        F1, _ = eval_tau(tau)  # na fase fina, não precisamos interromper ao faltar preds
+        if verbose:
+            print(f"[FINE]   tau={tau:.2f}  F1={F1:.6f}")
+        if F1 >= best_F1:
+            best_F1, best_tau = F1, tau
 
     return best_tau, best_F1
-
-#comentarios para serem apagados depois
-# def thersh():
-#    for 0.1 (0.1, 0.2, ..., 0.9) -> 9
-        #melhor_valor
-#    for 0.02 (0.X-0.08, ..., 0.X+0.08) -> 8
-# criar essa funcao para fazer for dentro de for, mas MANTER LOGICA DA ConfidenceThresholdOptimization
 
 def EvaluatingConfidenceScores(model,dataset,output_dir,experiment_name,verbose=True):
     '''Realiza validacao para diferentes valores do Confidence Threshold.'''
