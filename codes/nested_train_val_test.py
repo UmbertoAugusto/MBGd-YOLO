@@ -60,7 +60,7 @@ results_train = TrainModel(model=model,
 model_to_evaluate = YOLO(str(results_train.save_dir) + '/weights/best.pt')
 result_path_val = f'{experiment_name}/test_fold{fold_test}/val_fold{fold_val}/val/iter'
 
-best_conf, best_F1 = ConfidenceThresholdOptimization(model=model_to_evaluate,
+best_conf, best_F1, decision_iou_threshold = ConfidenceThresholdOptimization(model=model_to_evaluate,
                                                      dataset=dataset,
                                                      output_dir=output_dir,
                                                      experiment_name=result_path_val,
@@ -69,8 +69,14 @@ best_conf, best_F1 = ConfidenceThresholdOptimization(model=model_to_evaluate,
 
 #----------------------------------------------------------------------------------------------------
 #Saving validation metrics
-result_data = [['test_fold','val_fold','score','F1']] #header for .csv file
-result_data.append([fold_test,fold_val,best_conf,best_F1])
+if database.lower() == "integer":
+    result_data = [['test_fold','val_fold','score','F1']] #header for .csv file
+    result_data.append([fold_test,fold_val,best_conf,best_F1])
+
+elif database.lower() == "tiled":
+    result_data = [['test_fold','val_fold','score','decision_iou_threshold','F1']] #header for .csv file
+    result_data.append([fold_test,fold_val,best_conf,decision_iou_threshold,best_F1])
+
 #Writing file
 val_metrics_file_path = f'{output_dir}/{experiment_name}/val_results.csv'
 
@@ -90,7 +96,6 @@ with open(val_metrics_file_path, mode='a', newline='') as file:
 
 #----------------------------------------------------------------------------------------------------
 #evaluating model
-model_to_evaluate = YOLO(str(results_train.save_dir) + '/weights/best.pt')
 result_path = f'{experiment_name}/test_fold{fold_test}/val_fold{fold_val}/test'
 
 results_test = TestModel(model=model_to_evaluate,
@@ -98,6 +103,7 @@ results_test = TestModel(model=model_to_evaluate,
                           output_dir=output_dir,
                           experiment_name=result_path,
                           conf_score = best_conf,
+                          decision_iou_threshold = decision_iou_threshold,
                           database = database,
                           annotations_json_path=original_annotations_test_json_path)
 
@@ -110,8 +116,13 @@ F1 = results_test[5]
 
 #----------------------------------------------------------------------------------------------------
 #Saving test metrics
-result_data = [['fold_test','fold_val','conf_score','TP','FP','FN','Precision','Recall','F1','mAP@50-95','mAP@50']] #header for .csv file with results
-result_data.append([fold_test,fold_val,best_conf,TruePositives,FalsePositives,FalseNegatives,Precision,Recall,F1])
+if database.lower() == "integer":
+    result_data = [['fold_test','fold_val','conf_score','TP','FP','FN','Precision','Recall','F1']] #header for .csv file with results
+    result_data.append([fold_test,fold_val,best_conf,TruePositives,FalsePositives,FalseNegatives,Precision,Recall,F1])
+
+elif database.lower() == "tiled":
+    result_data = [['fold_test','fold_val','conf_score','decision_iou_threshold','TP','FP','FN','Precision','Recall','F1']] #header for .csv file with results
+    result_data.append([fold_test,fold_val,best_conf,decision_iou_threshold,TruePositives,FalsePositives,FalseNegatives,Precision,Recall,F1])
 
 #Saving results of all folds together
 test_metrics_file_path = f'{output_dir}/{experiment_name}/test_results.csv'

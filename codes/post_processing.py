@@ -17,7 +17,6 @@ NUM_ROWS = 4
 OVERLAP_PIXELS = int(TILE_SIZE * OVERLAP_RATIO)
 
 NMS_MATCH_THRESHOLD = 0.5 # acima disso eh considerado previsao duplicada e so fica uma
-IOU_THRESHOLD_FOR_MATCH = 0.5 # acima disso previsao eh considerada certa
 # ------------------------------------
 
 def parse_custom_filename_and_calculate_shift(filename_stem):
@@ -73,7 +72,7 @@ def calculate_iou(boxA, boxB):
 
 
 
-def PostProcessingTiledImages(pred_json_path, original_annotations_json_path, confidence_threshold):
+def PostProcessingTiledImages(pred_json_path, original_annotations_json_path, confidence_threshold, iou_thresh_tp_fp=0.5):
     # Load json files
     with open(pred_json_path, 'r') as f:
         yolo_preds = json.load(f)
@@ -240,7 +239,7 @@ def PostProcessingTiledImages(pred_json_path, original_annotations_json_path, co
                     best_iou = iou
                     best_gt_idx = i
             
-            if best_iou >= IOU_THRESHOLD_FOR_MATCH and not gt_matched[best_gt_idx]:
+            if best_iou >= iou_thresh_tp_fp and not gt_matched[best_gt_idx]:
                 tp += 1
                 gt_matched[best_gt_idx] = True # Marca como "usado"
             else:
